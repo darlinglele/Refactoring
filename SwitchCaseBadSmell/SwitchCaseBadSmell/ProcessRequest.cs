@@ -14,7 +14,7 @@ namespace SwitchCaseBadSmell
                     break;
                 case "user":
                 case "PwCUser":
-                    userDo();
+                    userDo();   
                     break;
             }
         }

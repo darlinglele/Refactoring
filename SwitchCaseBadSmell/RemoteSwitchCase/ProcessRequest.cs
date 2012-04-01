@@ -16,8 +16,9 @@ namespace RemoveSwitchCase
 
         private IRole createRoleInstance(string requestType)
         {
-            string factoryName = ConfigurationSettings.AppSettings[requestType];
-            string assemblyName = ConfigurationSettings.AppSettings["assemblyName"];
+
+            string factoryName = ConfigurationManager.AppSettings[requestType];
+            string assemblyName = ConfigurationManager.AppSettings["assemblyName"];
             IRole role = null;
             try
             {
