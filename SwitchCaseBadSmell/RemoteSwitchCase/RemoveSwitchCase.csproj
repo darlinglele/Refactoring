@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="AdminRoleFactory.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="IRoleFactory.cs" />
     <Compile Include="IRole.cs" />
     <Compile Include="ProcessRequest.cs" />
