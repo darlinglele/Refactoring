@@ -6,14 +6,14 @@ namespace FactoryMethod
         public void Handle(string request)
         {
             _request = request;
-            IRole user = UserRequest.Create(_request);
-            user.Do();
+            IRole role = RoleManager.Create(_request);
+            role.Do();
         }
 
         public void Response()
         {
-            IRole user = UserRequest.Create(_request);
-            user.SayHello();
+            IRole role = RoleManager.Create(_request);
+            role.SayHello();
         }
     }
 }

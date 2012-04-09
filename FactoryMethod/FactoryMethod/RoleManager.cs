@@ -4,31 +4,37 @@ using System.Configuration;
 
 namespace FactoryMethod
 {
-    public class UserRequest
+    public class RoleManager
     {
         private static Dictionary<string, IRoleFactory> _defaultFactories;
 
-        static UserRequest()
+        static RoleManager()
         {
             _defaultFactories = new Dictionary<string, IRoleFactory> { { "user", new UserFactory() }, { "admin", new AdminFactory() } };
         }
         public static IRole Create(string request)
         {
             IRoleFactory factory = getFactoryInstance(request);
-            return factory.CreateRole();
+            return factory == null ? null : factory.CreateRole();
         }
 
         private static IRoleFactory getFactoryInstance(string request)
         {
-            return _defaultFactories[request] ?? (customFactory(request));
+            return _defaultFactories.ContainsKey(request) ? _defaultFactories[request] : customFactory(request);
         }
 
         private static IRoleFactory customFactory(string request)
         {
-            string factoryTypeName = ConfigurationManager.AppSettings[request];
-            string assemblyNameKey = factoryTypeName + "_assembly";
-            string assemblyName = ConfigurationManager.AppSettings[assemblyNameKey];
-            return (IRoleFactory)Activator.CreateInstance(assemblyName, factoryTypeName);
+            string requestTypeKey = request;
+            string factoryTypeName = getConfigValue(requestTypeKey);
+            string assemblyNameKey = requestTypeKey + "_assembly";
+            string assemblyName = getConfigValue(assemblyNameKey);
+            return (IRoleFactory)Activator.CreateInstance(assemblyName, factoryTypeName).Unwrap();
+        }
+
+        private static string getConfigValue(string requestTypeKey)
+        {
+            return ConfigurationManager.AppSettings[requestTypeKey];
         }
 
         public static void Extends(string request, IRoleFactory factory)
