@@ -6,7 +6,7 @@ public class program {
     }
 
     private static void handle(char requestType) {
-        Helper.getRoleFactory(requestType).create().handle();
+        Helper.getRole(requestType).clone().handle();
     }
 
 }

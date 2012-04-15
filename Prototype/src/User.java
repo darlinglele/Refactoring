@@ -7,4 +7,10 @@ public class User  implements IRole{
     public void handle() {
         doAsUser();
     }
+    @Override
+    public IRole clone(){
+        return new User();
+    }
 }
+
+

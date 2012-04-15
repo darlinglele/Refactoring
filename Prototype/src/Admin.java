@@ -7,4 +7,9 @@ public class Admin implements IRole {
     public void handle() {
         doAsAdmin();
     }
+    
+    @Override
+    public IRole clone(){
+       return new Admin();
+    }
 }
