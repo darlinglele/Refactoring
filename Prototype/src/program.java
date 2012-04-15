@@ -7,19 +7,21 @@ public class program {
 
     private static void handle(char requestType) {
         IRole role = null;
+        IRoleFactory roleFactory;
+
         switch (requestType) {
             case 'A':
-                role = new Admin();
+                roleFactory = new AdminFactory();
                 break;
             case 'U':
-                role = new User();
+                roleFactory = new UserFactory();
                 break;
             default:
-                role = new User();
+                roleFactory = new UserFactory();
                 break;
         }
-        role.handle();
 
+        roleFactory.create().handle();
     }
 
 }
