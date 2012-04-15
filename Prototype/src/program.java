@@ -2,24 +2,20 @@ public class program {
     public static void main(String[] args) {
         char requestType;
         requestType = 'A';
+        handle(requestType);
+    }
+
+    private static void handle(char requestType) {
         switch (requestType) {
             case 'A':
-                doAsAdmin();
+                new Admin().doAsAdmin();
                 break;
             case 'U':
-                doAsUser();
+                new User().doAsUser();
                 break;
             default:
                 break;
         }
-    }
-
-    private static void doAsUser() {
-        System.out.println("I am User");
-    }
-
-    private static void doAsAdmin() {
-        System.out.println("I am Admin");
     }
 
 }
