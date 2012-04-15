@@ -6,16 +6,20 @@ public class program {
     }
 
     private static void handle(char requestType) {
+        IRole role = null;
         switch (requestType) {
             case 'A':
-                new Admin().doAsAdmin();
+                role = new Admin();
                 break;
             case 'U':
-                new User().doAsUser();
+                role = new User();
                 break;
             default:
+                role = new User();
                 break;
         }
+        role.handle();
+
     }
 
 }
